@@ -67,7 +67,7 @@ def integrationTest() {
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
                    "--reporters htmlextra"
                 //"--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
-  
+   
             } catch(e) {
                 echo "wow this fails!!"
                 throw e
