@@ -71,7 +71,7 @@ def integrationTest() {
                 echo "wow this fails!!"
                 throw e
             } finally {
-                junit 'newman/myreport.xml'
+                junit 'newman/myreport.xml' 
             }
         }
     
