@@ -67,7 +67,7 @@ def integrationTest() {
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
                    "--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html'"
                 //"--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'newman/newman-html-result.html', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'newman', reportFiles: 'newman-html-result.html', reportName: 'HTML Report', reportTitles: ''])
             } catch(e) {
                 echo "wow this fails!!"
                 throw e
