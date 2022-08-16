@@ -32,7 +32,7 @@ node {
     nodejs('nodejs') {
                 try {
                     sh "node -v"
-                    sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json" +
+                    sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json " +
                     //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
                        //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
                        //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
