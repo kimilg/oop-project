@@ -65,7 +65,7 @@ def integrationTest() {
                 sh "node -v"
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
-                   "--reporters htmlextra"
+                   "--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html'"
                 //"--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
    
             } catch(e) {
