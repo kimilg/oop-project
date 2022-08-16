@@ -62,7 +62,6 @@ def integrationTest() {
     
         nodejs('nodejs') {
             try {
-                npm install -g newman-reporter-html
                 sh "node -v"
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
