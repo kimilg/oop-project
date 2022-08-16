@@ -63,7 +63,9 @@ def integrationTest() {
         nodejs('nodejs') {
             try {   
                 sh "node -v"
-                sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
+                //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
+                sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json"
+
             } catch(e) {
                 echo "wow this fails!!"
                 throw e
