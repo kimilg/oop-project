@@ -66,7 +66,7 @@ def integrationTest() {
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
                    "--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' " +
-                   "--reporter-htmlextra-template ./template.hbs"                                   
+                   "--reporter-htmlextra-template ./newman-report-template.hbs"                                   
                 //"--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'newman', reportFiles: 'newman-html-result.html', reportName: 'HTML Report', reportTitles: ''])
             } catch(e) {
