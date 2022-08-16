@@ -70,6 +70,8 @@ def integrationTest() {
             } catch(e) {
                 echo "wow this fails!!"
                 throw e
+            } finally {
+                junit 'newman/myreport.xml'
             }
         }
     
