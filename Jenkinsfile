@@ -41,7 +41,7 @@ def isMergeCommit() {
   
 def integrationTest() {
     nodeJsHome = tool name: 'nodejs', type: 'nodejs'
-    newmanHome = "${nodeJsHome}/bin"    
+    //newmanHome = "${nodeJsHome}/bin"    
     commitName = checkout(scm).GIT_COMMIT
     branchName = checkout(scm).BRANCH_NAME
     echo "git commit is ${commitName}"
@@ -53,20 +53,12 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-    /*sh '''#!/bin/sh +x
-       if `git rev-parse --verify -q ${commitName}^2 > /dev/null;`  
-       then 
-          echo "This commit is merge commit : ${commitName}" 
-       else 
-          echo "This commit is NOT merge commit : ${commitName}"
-       fi'''*/
-    
         nodejs('nodejs') {
             try {
                 sh 'env printf "\u2024 \u2024 \u2024 \u2024 \u2024 \n"' 
                 sh "node -v"
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
-                sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
+                sh "${nodeJsHome}/bin/newman run ~/Downloads/ilgoo-test-collection.json " +
                    //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
                    //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
                 "--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
