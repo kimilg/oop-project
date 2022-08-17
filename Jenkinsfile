@@ -19,7 +19,7 @@ node {
     }
     
     Properties properties = new Properties()
-    File propertiesFile = new File('local.properties')
+    File propertiesFile = new File('./local.properties')
     propertiesFile.withInputStream {
         properties.load(it)
     }
