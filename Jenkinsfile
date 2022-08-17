@@ -68,7 +68,7 @@ def integrationTest() {
     nodejs('nodejs') {
         try {
             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-            "--environment dev-platform-api.postman_environment.json " +
+            "--environment ~/Downloads/dev-platform-api.postman_environment.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" 
         }
         catch(e) {
