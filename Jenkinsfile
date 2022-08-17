@@ -18,6 +18,17 @@ node {
         ])
     }
     
+    Properties properties = new Properties()
+    File propertiesFile = new File('local.properties')
+    propertiesFile.withInputStream {
+        properties.load(it)
+    }
+    
+    def POSTMAN_COLLECTION_UID = properties."POSTMAN_COLLECTION_UID"
+    def POSTMAN_ENVIRONMENT_UID = properties."POSTMAN_ENVIRONMENT_UID"
+    def POSTMAN_API_KEY = properties."POSTMAN_API_KEY"
+    
+    
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
         echo "wow merge commit!"
     }
@@ -53,22 +64,37 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-        nodejs('nodejs') {
-            try {
-                sh 'env printf "\u2024 \u2024 \u2024 \u2024 \u2024 \n"' 
-                sh "node -v"
-                //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
-                sh "${nodeJsHome}/bin/newman run ~/Downloads/ilgoo-test-collection.json " +
-                   //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
-                   //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
-                "--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
-            } catch(e) {
-                echo "wow this fails!!"
-                throw e
-            } finally {
-                junit 'newman/myreport.xml' 
-            }
+    nodejs('RecentNode') {
+        try {
+            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
+            "apikey=${POSTMAN_API_KEY} " +
+            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
+            "apikey=${POSTMAN_API_KEY} " +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" 
         }
+        catch(e) {
+            //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
+            throw e
+        } finally {
+            junit 'newman/integration-test-result.xml' 
+        }
+    }
+    
+//         nodejs('nodejs') {
+//             try { 
+//                 sh "node -v"
+//                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
+//                 sh "${nodeJsHome}/bin/newman run ~/Downloads/ilgoo-test-collection.json " +
+//                    //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
+//                    //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
+//                 "--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
+//             } catch(e) {
+//                 echo "wow this fails!!"
+//                 throw e
+//             } finally {
+//                 junit 'newman/myreport.xml' 
+//             }
+//         }
     
 }
 
