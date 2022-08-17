@@ -18,16 +18,17 @@ node {
         ])
     }
     
-    Properties properties = new Properties()
-    File propertiesFile = new File('/Users/user/Documents/kimilg/oop-project/local.properties')
-    propertiesFile.withInputStream {
-        properties.load(it)
-    }
+//     Properties properties = new Properties()
+//     File propertiesFile = new File('/Users/user/Documents/kimilg/oop-project/local.properties')
+//     propertiesFile.withInputStream {
+//         properties.load(it)
+//     }
+//     
+//     def POSTMAN_COLLECTION_UID = properties."POSTMAN_COLLECTION_UID"
+//     def POSTMAN_ENVIRONMENT_UID = properties."POSTMAN_ENVIRONMENT_UID"
+//     def POSTMAN_API_KEY = properties."POSTMAN_API_KEY"
     
-    def POSTMAN_COLLECTION_UID = properties."POSTMAN_COLLECTION_UID"
-    def POSTMAN_ENVIRONMENT_UID = properties."POSTMAN_ENVIRONMENT_UID"
-    def POSTMAN_API_KEY = properties."POSTMAN_API_KEY"
-    
+
     
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
         echo "wow merge commit!"
@@ -66,10 +67,8 @@ def integrationTest() {
     
     nodejs('RecentNode') {
         try {
-            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
+            sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
+            "--environment dev-platform-api.postman_environment " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" 
         }
         catch(e) {
