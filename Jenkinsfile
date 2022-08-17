@@ -29,21 +29,6 @@ node {
         integrationTest()
     }
     
-    nodejs('nodejs') {
-                try {
-                    sh "node -v"
-                    sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json " +
-                    //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
-                       //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
-                       //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
-                    "--reporters cli,junit --reporter-junit-export 'newman/myreport2.xml'" 
-                } catch(e) {
-                    echo "wow this fails!!"
-                    throw e
-                } finally {
-                    junit 'newman/myreport2.xml' 
-                }
-            }
 }
 
 def isMergeCommit() { 
@@ -78,6 +63,7 @@ def integrationTest() {
     
         nodejs('nodejs') {
             try {
+                sh 'env printf "\u2024 \u2024 \u2024 \u2024 \u2024 \n"'
                 sh "node -v"
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
