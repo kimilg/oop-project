@@ -65,7 +65,7 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-    nodejs('RecentNode') {
+    nodejs('nodejs') {
         try {
             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
             "--environment dev-platform-api.postman_environment " +
