@@ -63,7 +63,7 @@ def integrationTest() {
     
         nodejs('nodejs') {
             try {
-                sh 'env printf "\u2024 \u2024 \u2024 \u2024 \u2024 \n"'
+                sh 'env printf "\u2024 \u2024 \u2024 \u2024 \u2024 \n"' 
                 sh "node -v"
                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
                 sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.json " +
