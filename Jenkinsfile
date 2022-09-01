@@ -70,9 +70,7 @@ def integrationTest() {
     
     VARIABLE = credentials('secret-key')
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-        echo "VARIABLE : " + $key
-        echo "VARIABLE : " + $key
-        echo "VARIABLE : " + $key    
+        echo "VARIABLE : " + ${key}
     }
     
     
