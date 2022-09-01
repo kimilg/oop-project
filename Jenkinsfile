@@ -36,6 +36,9 @@ node {
     else {
         echo "wow not merge commit@!"
     }
+    environment {
+        VARIABLE = "123456789"
+    }
     
     stage('IntegrationTest') {
         integrationTest()
@@ -65,11 +68,16 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
+    echo "VARIABLE : " + ${VARIABLE}
+    echo "VARIABLE : " + ${VARIABLE}
+    echo "VARIABLE : " + ${VARIABLE}
+    
     nodejs('nodejs') {
         try {
             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-            "--environment ~/Downloads/dev-platform-api.postman_environment.json " +
-            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" 
+            "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
+            "--working-dir /Users/user/Postman/files"
         }
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
