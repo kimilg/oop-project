@@ -68,9 +68,9 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-    echo "VARIABLE : " + ${VARIABLE}
-    echo "VARIABLE : " + ${VARIABLE}
-    echo "VARIABLE : " + ${VARIABLE}
+    echo "VARIABLE : " + VARIABLE
+    echo "VARIABLE : " + VARIABLE
+    echo "VARIABLE : " + VARIABLE
     
     nodejs('nodejs') {
         try {
