@@ -70,7 +70,7 @@ def integrationTest() {
     
     
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-        VARIABLE = "$key" 
+        VARIABLE = "${key}" 
     }
     
     
