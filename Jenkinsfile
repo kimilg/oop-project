@@ -72,12 +72,14 @@ def integrationTest() {
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
         VARIABLE = "${key}" 
     }
-    
-    
+    withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
+        VARIABLE2 = "${key}" 
+    }
     
     nodejs('nodejs') {
         try {
             echo "${VARIABLE}"
+            echo "${VARIABLE2}"
             
             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
