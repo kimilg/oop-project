@@ -69,17 +69,16 @@ def integrationTest() {
     echo "job name : " + env.JOB_NAME 
     
     
-    withCredentials([string(credentialsId: 'secret-key', variable: 'key-key')]) {
-        VARIABLE = "${key-key}" 
+    withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
+        VARIABLE = "${key}" 
     }
-    withCredentials([string(credentialsId: 'secret-key2', variable: 'key-key')]) {
-        VARIABLE2 = "${key-key}" 
+    withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
+        VARIABLE2 = "${key}" 
     }
     
     nodejs('nodejs') {
         try {
-            echo "${VARIABLE}"
-            echo "${VARIABLE2}"
+            sh "${VARIABLE}" + "${VARIABLE2}"
             
             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
