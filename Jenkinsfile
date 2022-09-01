@@ -68,7 +68,7 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-    VARIABLE = "11"
+    
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
         VARIABLE = "$key" 
     }
