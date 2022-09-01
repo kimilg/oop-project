@@ -5,6 +5,12 @@ DEFAULT_LINK_URL = env.BUILD_URL
 properties([
     disableConcurrentBuilds()
 ])
+
+environment {
+    VARIABLE = "123456789"
+}
+    
+    
 properties([pipelineTriggers([githubPullRequests(events: [close()], spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
 node {
 
@@ -36,9 +42,7 @@ node {
     else {
         echo "wow not merge commit@!"
     }
-    environment {
-        VARIABLE = "123456789"
-    }
+    
     
     stage('IntegrationTest') {
         integrationTest()
