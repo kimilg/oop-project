@@ -5,10 +5,6 @@ DEFAULT_LINK_URL = env.BUILD_URL
 properties([
     disableConcurrentBuilds()
 ])
-
-environment {
-    VARIABLE = "123456789"
-}
     
     
 properties([pipelineTriggers([githubPullRequests(events: [close()], spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
@@ -71,6 +67,8 @@ def integrationTest() {
     echo "target branch is " + env.CHANGE_TARGET
     
     echo "job name : " + env.JOB_NAME 
+    
+    VARIABLE = credentials('secret-key')
     
     echo "VARIABLE : " + VARIABLE
     echo "VARIABLE : " + VARIABLE
