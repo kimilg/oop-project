@@ -1,0 +1,123 @@
+
+m
+java:S1104	"RMake mapRow a static final constant or non-public and provide accessors if needed.(ƒ¤“Áÿÿÿÿÿ
+h
+java:S1104
+"RMake mapCol a static final constant or non-public and provide accessors if needed.(ÿœ¶È
+G
+java:S1444	",Make this "public static mapRow" field final(ƒ¤“Áÿÿÿÿÿ
+B
+java:S1444
+",Make this "public static mapCol" field final(ÿœ¶È
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(òŠÏÕÿÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ûéÀ«ıÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ä…Ş«
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ı¿Õøÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(²Ş®úıÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ƒ»«
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Á¨ƒ 
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ò¤ê…üÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(îÈÓã
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¦ÙŸÇ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÅÜÖ·ıÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(áíşœ
+n	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(àÚŒG
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¸øåÃ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¶äùß
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¹œˆ’ùÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ù’ëúÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(•ÄÂÁûÿÿÿÿ
+o	java:S115""ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.( ¾øº
+t	java:S115#"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¼‚¬êûÿÿÿÿ
+t	java:S115$"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ìî¨±ÿÿÿÿÿ
+t	java:S115%"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ï¸²Ğùÿÿÿÿ
+t	java:S115'"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÄÔ›¡ûÿÿÿÿ
+t	java:S115("ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.( ñ’Ãùÿÿÿÿ
+o	java:S115)"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.( İ•ÿ
+t	java:S115*"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÃÃ‡ÿøÿÿÿÿ
+o	java:S115+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÖÛÌ›
+o	java:S115,"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(µ¿ôå
+c
+java:S1845"HRename field "up" to prevent any misunderstanding/clash with field "UP".(òŠÏÕÿÿÿÿÿ
+g
+java:S1845"LRename field "down" to prevent any misunderstanding/clash with field "DOWN".(ûéÀ«ıÿÿÿÿ
+g
+java:S1845"LRename field "left" to prevent any misunderstanding/clash with field "Left".(ı¿Õøÿÿÿÿ
+d
+java:S1845"NRename field "right" to prevent any misunderstanding/clash with field "Right".(ƒ»«
+g
+java:S1845"LRename field "push" to prevent any misunderstanding/clash with field "Push".(ò¤ê…üÿÿÿÿ
+h
+java:S1845"RRename field "nothing" to prevent any misunderstanding/clash with field "Nothing".(¦ÙŸÇ
+`
+java:S1845"JRename field "eat" to prevent any misunderstanding/clash with field "Eat".(áíşœ
+f
+java:S1845"PRename field "attack" to prevent any misunderstanding/clash with field "Attack".(¸øåÃ
+i
+java:S1845"NRename field "leave" to prevent any misunderstanding/clash with field "Leave".(¹œˆ’ùÿÿÿÿ
+e
+java:S1845"JRename field "get" to prevent any misunderstanding/clash with field "Get".(•ÄÂÁûÿÿÿÿ
+P
+java:S1118":Add a private constructor to hide the implicit public one.(Óùÿ¿
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(øÍšÂ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(òŠÏÕÿÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¦™ĞŒ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ûéÀ«ıÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Ä…Ş«
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ı¿Õøÿÿÿÿ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(²Ş®úıÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ƒ»«
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Á¨ƒ 
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ò¤ê…üÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(îÈÓã
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¦ÙŸÇ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÅÜÖ·ıÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(áíşœ
+Z
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(àÚŒG
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¸øåÃ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¶äùß
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¹œˆ’ùÿÿÿÿ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ù’ëúÿÿÿÿ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(•ÄÂÁûÿÿÿÿ
+[
+java:S1124""EReorder the modifiers to comply with the Java Language Specification.( ¾øº
+`
+java:S1124#"EReorder the modifiers to comply with the Java Language Specification.(¼‚¬êûÿÿÿÿ
+`
+java:S1124$"EReorder the modifiers to comply with the Java Language Specification.(ìî¨±ÿÿÿÿÿ
+`
+java:S1124%"EReorder the modifiers to comply with the Java Language Specification.(ï¸²Ğùÿÿÿÿ
+`
+java:S1124&"EReorder the modifiers to comply with the Java Language Specification.(À†½İıÿÿÿÿ
+`
+java:S1124'"EReorder the modifiers to comply with the Java Language Specification.(ÄÔ›¡ûÿÿÿÿ
+`
+java:S1124("EReorder the modifiers to comply with the Java Language Specification.( ñ’Ãùÿÿÿÿ
+[
+java:S1124)"EReorder the modifiers to comply with the Java Language Specification.( İ•ÿ
+`
+java:S1124*"EReorder the modifiers to comply with the Java Language Specification.(ÃÃ‡ÿøÿÿÿÿ
+[
+java:S1124+"EReorder the modifiers to comply with the Java Language Specification.(ÖÛÌ›
+[
+java:S1124,"EReorder the modifiers to comply with the Java Language Specification.(µ¿ôå

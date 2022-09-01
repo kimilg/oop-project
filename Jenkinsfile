@@ -97,12 +97,14 @@ def integrationTest() {
 //             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
 //             "--working-dir /Users/user/Postman/files"
             
-            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--reporters postman-cloud --reporter-apikey \"${POSTMAN_API_KEY}\" " +
-            "--reporter-workspaceId \"${POSTMAN_WORKSPACE_ID}\" "
+            sh 'npm install -g newman-reporter-postman-cloud'
+            
+            sh '${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?' +
+            'apikey=${POSTMAN_API_KEY} ' +
+            '--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?' +
+            'apikey=${POSTMAN_API_KEY} ' +
+            '--reporters postman-cloud --reporter-apikey "${POSTMAN_API_KEY}" ' +
+            '--reporter-workspaceId "${POSTMAN_WORKSPACE_ID}" '
         }
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
