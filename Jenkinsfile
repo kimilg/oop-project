@@ -70,9 +70,9 @@ def integrationTest() {
     
     VARIABLE = credentials('secret-key')
     
-    echo "VARIABLE : " + VARIABLE
-    echo "VARIABLE : " + VARIABLE
-    echo "VARIABLE : " + VARIABLE
+    echo "VARIABLE : " + $VARIABLE
+    echo "VARIABLE : " + $VARIABLE
+    echo "VARIABLE : " + $VARIABLE
     
     nodejs('nodejs') {
         try {
