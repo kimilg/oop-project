@@ -68,12 +68,12 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     
-    VARIABLE = credentials('secret-key')
-    echo "VARIABLE :: ${VARIABLE}"
+    VARIABLE = "11"
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-        //echo "VARIABLE : $key" 
+        VARIABLE = "$key" 
     }
     
+    echo "${VARIABLE}"
     
     nodejs('nodejs') {
         try {
