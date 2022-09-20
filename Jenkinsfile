@@ -71,7 +71,7 @@ def integrationTest() {
     
     echo "repo name : " + repoName
     echo "repo name : " + $repoName
-    
+     
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
         VARIABLE = "${key}" 
     }
