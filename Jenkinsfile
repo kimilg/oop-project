@@ -67,7 +67,10 @@ def integrationTest() {
     echo "target branch is " + env.CHANGE_TARGET
     
     echo "job name : " + env.JOB_NAME 
+    repoName = checkout(scm).getUserRemoteConfig()[0].getUrl().tokenize('/').last()
     
+    echo "repo name : " + repoName
+    echo "repo name : " + $repoName
     
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
         VARIABLE = "${key}" 
@@ -99,12 +102,12 @@ def integrationTest() {
             
             sh 'npm install -g newman-reporter-postman-cloud'
             
-            sh '${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?' +
-            'apikey=${POSTMAN_API_KEY} ' +
-            '--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?' +
-            'apikey=${POSTMAN_API_KEY} ' +
-            '--reporters postman-cloud --reporter-apikey "${POSTMAN_API_KEY}" ' +
-            '--reporter-workspaceId "${POSTMAN_WORKSPACE_ID}" '
+            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
+            "apikey=${POSTMAN_API_KEY} " +
+            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
+            "apikey=${POSTMAN_API_KEY} " +
+            "--reporters postman-cloud --reporter-apikey ${POSTMAN_API_KEY} " +
+            "--reporter-workspaceId ${POSTMAN_WORKSPACE_ID} "
         }
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
