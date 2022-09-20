@@ -68,7 +68,7 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     repoName = checkout(scm).getUserRemoteConfig()[0].getUrl().tokenize('/').last()
-    
+     
     echo "repo name : " + repoName
     echo "repo name : " + $repoName
      
