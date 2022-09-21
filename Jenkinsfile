@@ -71,7 +71,9 @@ def integrationTest() {
     
     echo "repo name : ${repoName}" 
     
-   
+    if("${repoName}" == "oop-project") {
+         echo "repo name222 : ${repoName}"
+     }
      
 //     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
 //         VARIABLE = "${key}" 
