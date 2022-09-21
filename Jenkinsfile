@@ -71,7 +71,7 @@ def integrationTest() {
     
     echo "repo name : ${repoName}" 
     
-    if(repoName.equalsIgnoreCase("oop-project") {
+    if("${repoName}".equalsIgnoreCase("oop-project") {
         echo "repo name222 : ${repoName}"
     }
      
