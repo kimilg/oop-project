@@ -68,8 +68,12 @@ def integrationTest() {
     
     echo "job name : " + env.JOB_NAME 
     repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
-          
+    
     echo "repo name : ${repoName}" 
+    
+    if(repoName.equalsIgnoreCase("oop-project") {
+        echo "repo name222 : ${repoName}"
+    }
      
     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
         VARIABLE = "${key}" 
