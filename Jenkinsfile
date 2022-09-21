@@ -75,42 +75,42 @@ def integrationTest() {
         echo "repo name222 : ${repoName}"
     }
      
-    withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-        VARIABLE = "${key}" 
-    }
-    withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
-        VARIABLE2 = "${key}" 
-    }
-    
-    withCredentials([string(credentialsId: 'postman-collection-uid-platform-api', variable: 'collectionUid')]) {
-        POSTMAN_COLLECTION_UID = "${collectionUid}"
-    }
-    withCredentials([string(credentialsId: 'postman-environment-uid-platform-api', variable: 'environmentUid')]) {
-        POSTMAN_ENVIRONMENT_UID = "${environmentUid}"
-    }
-    withCredentials([string(credentialsId: 'postman-api-key', variable: 'apiKey')]) {
-        POSTMAN_API_KEY = "${apiKey}"
-    }
-    withCredentials([string(credentialsId: 'postman-workspace-id-smarteditor', variable: 'workspaceId')]) {
-        POSTMAN_WORKSPACE_ID = "${workspaceId}"
-    }
+//     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
+//         VARIABLE = "${key}" 
+//     }
+//     withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
+//         VARIABLE2 = "${key}" 
+//     }
+//     
+//     withCredentials([string(credentialsId: 'postman-collection-uid-platform-api', variable: 'collectionUid')]) {
+//         POSTMAN_COLLECTION_UID = "${collectionUid}"
+//     }
+//     withCredentials([string(credentialsId: 'postman-environment-uid-platform-api', variable: 'environmentUid')]) {
+//         POSTMAN_ENVIRONMENT_UID = "${environmentUid}"
+//     }
+//     withCredentials([string(credentialsId: 'postman-api-key', variable: 'apiKey')]) {
+//         POSTMAN_API_KEY = "${apiKey}"
+//     }
+//     withCredentials([string(credentialsId: 'postman-workspace-id-smarteditor', variable: 'workspaceId')]) {
+//         POSTMAN_WORKSPACE_ID = "${workspaceId}"
+//     }
     
     nodejs('nodejs') {
         try {
             
-//             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-//             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
-//             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
-//             "--working-dir /Users/user/Postman/files"
+            sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
+            "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
+            "--working-dir /Users/user/Postman/files"
             
-            sh 'npm install -g newman-reporter-postman-cloud'
-            
-            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--reporters postman-cloud --reporter-apikey ${POSTMAN_API_KEY} " +
-            "--reporter-workspaceId ${POSTMAN_WORKSPACE_ID} "
+//             sh 'npm install -g newman-reporter-postman-cloud'
+//             
+//             sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
+//             "apikey=${POSTMAN_API_KEY} " +
+//             "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
+//             "apikey=${POSTMAN_API_KEY} " +
+//             "--reporters postman-cloud --reporter-apikey ${POSTMAN_API_KEY} " +
+//             "--reporter-workspaceId ${POSTMAN_WORKSPACE_ID} "
         }
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
