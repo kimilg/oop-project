@@ -71,7 +71,7 @@ def integrationTest() {
     
     echo "repo name : ${repoName}" 
     
-    if("${repoName}" == "oop-project") {
+    if("${repoName}" == "oop-projectd") {
          echo "repo name222 : ${repoName}"
      }
      
