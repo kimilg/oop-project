@@ -110,7 +110,7 @@ def integrationTest() {
     
     
     
-    nodejs('nodejs') {    
+    nodejs('nodejs') {     
         try {
             sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/oop-project/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
