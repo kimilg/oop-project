@@ -70,7 +70,7 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
       
-    nodejs('nodejs') {
+    nodejs('nodejs') { 
         try {
         
             dir('../../') {
