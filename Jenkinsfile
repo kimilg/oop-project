@@ -75,11 +75,10 @@ def fetchPostmanData() {
 //         sh "git clone https://github.com/kimilg/oop-project.git oop-project.${timeStamp}"
 //     }
     
-    final postmanDataDir = "oop-project"  
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
-        sh "git clone https://github.com/kimilg/oop-project.git ${postmanDataDir}"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }  
 }
      
@@ -113,7 +112,7 @@ def integrationTest() {
     
     nodejs('nodejs') {  
         try {
-            sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
+            sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/oop-project/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
               
