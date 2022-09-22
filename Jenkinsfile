@@ -79,7 +79,7 @@ def integrationTest() {
                 sh "git clone https://github.com/kimilg/oop-project.git oop-project"
             }
             
-            npm i newman@5.3.2
+            sh "npm i newman@5.3.2"
             sh "${nodeJsHome}/bin/newman run ~/.jenkins/oop-project/postman-data/test-collection.json" +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
             "--working-dir /Users/user/Postman/files"
