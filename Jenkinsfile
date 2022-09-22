@@ -42,9 +42,9 @@ node {
 //     stage('deleteOldPostmanData') {
 //         deleteOldPostmanData();
 //     }
-    stage('updatePostmanData') {
-        fetchPostmanData();
-    }
+//     stage('updatePostmanData') {
+//         fetchPostmanData();
+//     }
     stage('IntegrationTest') {
        integrationTest()
     } 
@@ -67,11 +67,12 @@ def deleteOldPostmanData() {
 }
 
 def fetchPostmanData() {
-    echo "TimeStamp: ${currentBuild.startTimeInMillis}"
+    timeStamp = "${currentBuild.startTimeInMillis}"
+    
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project${currentBuild.startTimeInMillis}"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project.${timeStamp}"
     } 
 }
      
@@ -91,10 +92,20 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
-    postmanDataDir = "oop-project${currentBuild.startTimeInMillis}"
+    
+    
+    timeStamp = "${currentBuild.startTimeInMillis}"
+    postmanDataDir = "oop-project.${timeStamp}"    
+    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
+    dir('../../postman') {
+        sh "rm -rf oop-project*"
+        sh "git clone https://github.com/kimilg/oop-project.git ${postmanDataDir}"
+    } 
+    
+    
     nodejs('nodejs') {  
         try {
-            sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
+            sh "${nodeJsHome}/bin/newman run Users/user/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
               
