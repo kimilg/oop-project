@@ -76,7 +76,7 @@ def integrationTest() {
         sh "rm -rf oop-project"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
-                
+                 
     nodejs('nodejs') {  
         try {
             sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/oop-project/postman-data/test-collection.json " +
