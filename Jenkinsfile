@@ -72,7 +72,7 @@ def fetchPostmanData() {
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     } 
 }
-  
+   
 def integrationTest() {
     nodeJsHome = tool name: 'nodejs', type: 'nodejs'
     //newmanHome = "${nodeJsHome}/bin"    
