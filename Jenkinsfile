@@ -72,8 +72,10 @@ def integrationTest() {
     echo "repo name : ${repoName}" 
     
     if("${repoName}" == "oop-project") {
-         echo "repo name222 : ${repoName}"
-         sh "git clone https://github.com/kimilg/study-scheduler-app.git"
+         dir('~/.jenkins/') {
+             echo "repo name222 : ${repoName}"
+             sh "git clone https://github.com/kimilg/study-scheduler-app.git"
+         }
     }
      
     
@@ -85,38 +87,14 @@ def integrationTest() {
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
             "--working-dir /Users/user/Postman/files"
             
-//             sh 'npm install -g newman-reporter-postman-cloud'
-//             
-//             sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
-//             "apikey=${POSTMAN_API_KEY} " +
-//             "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
-//             "apikey=${POSTMAN_API_KEY} " +
-//             "--reporters postman-cloud --reporter-apikey ${POSTMAN_API_KEY} " +
-//             "--reporter-workspaceId ${POSTMAN_WORKSPACE_ID} "
         }
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
             throw e
         } finally {
-//             junit 'newman/integration-test-result.xml' 
+             junit 'newman/integration-test-result.xml' 
         }
     }
-    
-//         nodejs('nodejs') {
-//             try { 
-//                 sh "node -v"
-//                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
-//                 sh "${nodeJsHome}/bin/newman run ~/Downloads/ilgoo-test-collection.json " +
-//                    //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
-//                    //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
-//                 "--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
-//             } catch(e) {
-//                 echo "wow this fails!!"
-//                 throw e
-//             } finally {
-//                 junit 'newman/myreport.xml' 
-//             }
-//         }
     
 }
 
