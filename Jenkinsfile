@@ -70,8 +70,8 @@ def fetchPostmanData() {
     echo "TimeStamp: ${currentBuild.startTimeInMillis}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
-        sh "rm -rf oop-project"
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+        sh "rm -rf oop-project*"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project${currentBuild.startTimeInMillis}"
     } 
 }
      
@@ -91,9 +91,10 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
+    postmanDataDir = "oop-project${currentBuild.startTimeInMillis}"
     nodejs('nodejs') {  
         try {
-            sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/oop-project/postman-data/test-collection.json " +
+            sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
               
