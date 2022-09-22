@@ -100,7 +100,7 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
-    echo scm.userRemoteConfigs()[0]
+    echo scm.userRemoteConfigs().credentialsId
     
     //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     def now = new Date()
