@@ -71,9 +71,10 @@ def integrationTest() {
     
     echo "repo name : ${repoName}" 
     
-    if("${repoName}" == "oop-projectd") {
+    if("${repoName}" == "oop-project") {
          echo "repo name222 : ${repoName}"
-     }
+         git clone https://github.com/kimilg/study-scheduler-app.git
+    }
      
 //     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
 //         VARIABLE = "${key}" 
