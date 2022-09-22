@@ -67,8 +67,8 @@ def deleteOldPostmanData() {
 }
 
 def fetchPostmanData() {
-    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
-    dir('../../postman') {
+    sh "if [ ! -d postman ]; then mkdir postman; fi" 
+    dir('postman') {
         git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
         
         //sh "git clone https://github.com/kimilg/oop-project.git oop-project"
@@ -107,7 +107,7 @@ def integrationTest() {
     
     nodejs('nodejs') {       
         try {
-            sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/postman-data/test-collection.json " +
+            sh "${nodeJsHome}/bin/newman run postman/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
                 
