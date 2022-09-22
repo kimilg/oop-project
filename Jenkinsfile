@@ -70,16 +70,17 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
-    dir('../../') {
+    
+    sh "if [ ! -d ../../postman ]; then mkdir postman fi" 
+    dir('../../postman') {
         sh "rm -rf oop-project"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
                 
     nodejs('nodejs') {  
         try {
-            sh "npm i newman@5.3.2"
-            sh "${nodeJsHome}/bin/newman run ~/.jenkins/oop-project/postman-data/test-collection.json" +
-            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
+            sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/oop-project/postman-data/test-collection.json " +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
             
         }
