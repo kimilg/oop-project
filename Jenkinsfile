@@ -39,9 +39,9 @@ node {
         echo "wow not merge commit@!"
     }
     
-//     stage('deleteOldPostmanData') {
-//         deleteOldPostmanData();
-//     }
+    stage('deleteOldPostmanData') {
+        deleteOldPostmanData();
+    }
     stage('updatePostmanData') {
         fetchPostmanData();
     }
@@ -67,17 +67,8 @@ def deleteOldPostmanData() {
 }
 
 def fetchPostmanData() {
-//     timeStamp = "${currentBuild.startTimeInMillis}"
-//     
-//     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
-//     dir('../../postman') {
-//         sh "rm -rf oop-project*"
-//         sh "git clone https://github.com/kimilg/oop-project.git oop-project.${timeStamp}"
-//     }
-    
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
-        sh "rm -rf oop-project*"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }  
 }
