@@ -94,8 +94,8 @@ def integrationTest() {
     
     
     
-    timeStamp = "${currentBuild.startTimeInMillis}"
-    postmanDataDir = "oop-project.${timeStamp}"    
+    timeStamp = "${currentBuild.startTimeInMillis}" 
+    postmanDataDir = "oop-project.${timeStamp}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
