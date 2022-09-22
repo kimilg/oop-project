@@ -88,8 +88,8 @@ def integrationTest() {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
             throw e
         } finally {
-            junit testResults: 'results.xml', skipPublishingChecks: true
-            junit 'newman/integration-test-result.xml' 
+            junit testResults: 'newman/integration-test-result.xml', skipPublishingChecks: true
+            //junit 'newman/integration-test-result.xml' 
         }
     }
     
