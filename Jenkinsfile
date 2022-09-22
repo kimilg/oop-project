@@ -107,7 +107,7 @@ def integrationTest() {
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
               
-        }
+        } 
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
             throw e
