@@ -72,7 +72,9 @@ def integrationTest() {
     
     
     dir('../../') {
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '142e088a-bfdb-44e9-9dd8-f134ddedc50f', url: 'https://github.com/kimilg/oop-project.git']]])
+        //sh "git pull"
+        //sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
       
     
