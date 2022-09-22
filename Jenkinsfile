@@ -18,7 +18,7 @@ node {
                 extensions                     : [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
                 userRemoteConfigs               : scm.userRemoteConfigs,
         ])
-    }
+    } 
     
 //     Properties properties = new Properties()
 //     File propertiesFile = new File('/Users/user/Documents/kimilg/oop-project/local.properties')
@@ -69,16 +69,14 @@ def integrationTest() {
     echo "job name : " + env.JOB_NAME 
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
-      
+    
+    dir('../../') {
+        sh "rm -rf oop-project"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+    }
+                
     nodejs('nodejs') { 
         try {
-            
-            dir('../../') {
-                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '142e088a-bfdb-44e9-9dd8-f134ddedc50f', url: 'https://github.com/kimilg/oop-project.git']]])
-                sh "rm -rf oop-project"
-                sh "git clone https://github.com/kimilg/oop-project.git oop-project"
-            }
-            
             sh "npm i newman@5.3.2"
             sh "${nodeJsHome}/bin/newman run ~/.jenkins/oop-project/postman-data/test-collection.json" +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
