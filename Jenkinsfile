@@ -71,7 +71,14 @@ def fetchPostmanData() {
     dir('postman') {
         git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
         
-        //sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+//         checkout([
+//                 $class                         : 'GitSCM',
+//                 branches                         : [[name: '**']],
+//                 doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+//                 extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
+//                                                   [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+//                 userRemoteConfigs               : [[credentialsId: scm.userRemoteConfigs, url: 'https://github.com/kimilg/myhomepage.git']]
+//         ])
     }  
 }
 
@@ -93,7 +100,7 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
-    echo scm.userRemoteConfigs
+    echo scm.userRemoteConfigs()[0]
     
     //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     def now = new Date()
