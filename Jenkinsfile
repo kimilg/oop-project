@@ -40,7 +40,7 @@ node {
     }
     
     stage('deleteOldPostmanData') {
-        fetchPostmanData();
+        deleteOldPostmanData();
     }
     stage('updatePostmanData') {
         fetchPostmanData();
