@@ -106,7 +106,7 @@ def integrationTest() {
             sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/oop-project/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
-              
+               
         }  
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
