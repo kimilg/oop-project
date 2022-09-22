@@ -7,7 +7,7 @@ properties([
 ])
     
     
-properties([pipelineTriggers([githubPullRequests(events: [close()], spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
+properties([pipelineTriggers([githubPullRequests(events: '', spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
 node {
 
     stage('Checkout') {
