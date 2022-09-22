@@ -71,7 +71,7 @@ def integrationTest() {
     //echo "repo name : ${repoName}" 
     
     
-    sh "if [ ! -d ../../postman ]; then mkdir postman fi" 
+    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
