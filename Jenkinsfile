@@ -96,8 +96,12 @@ def integrationTest() {
     
     //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     def now = new Date()
-    timeStamp = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC')) 
-    postmanDataDir = "oop-project.${timeStamp}"
+    timeStamp = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+    script {
+      DATE_TAG = java.time.LocalDate.now()
+      DATETIME_TAG = java.time.LocalDateTime.now()
+    }
+    postmanDataDir = "oop-project.${DATETIME_TAG}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
@@ -107,7 +111,7 @@ def integrationTest() {
     
     nodejs('nodejs') {  
         try {
-            sh "${nodeJsHome}/bin/newman run Users/user/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
+            sh "${nodeJsHome}/bin/newman run /Users/user/.jenkins/postman/${postmanDataDir}/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
               
