@@ -68,18 +68,18 @@ def deleteOldPostmanData() {
 
 def fetchPostmanData() {
     sh "if [ ! -d postman ]; then mkdir postman; fi" 
-    dir('postman') {
-        git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
-        
-//         checkout([
-//                 $class                         : 'GitSCM',
-//                 branches                         : [[name: '**']],
-//                 doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-//                 extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
-//                                                   [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
-//                 userRemoteConfigs               : [[credentialsId: scm.userRemoteConfigs, url: 'https://github.com/kimilg/myhomepage.git']]
-//         ])
-    }  
+    
+//     dir('postman') {
+//         git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
+//     }
+    checkout([
+            $class                         : 'GitSCM',
+            branches                         : [[name: '**']],
+            doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+            extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
+                                              [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+            userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
+    ])
 }
 
 
