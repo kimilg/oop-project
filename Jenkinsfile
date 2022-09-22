@@ -73,28 +73,9 @@ def integrationTest() {
     
     if("${repoName}" == "oop-project") {
          echo "repo name222 : ${repoName}"
-         git clone https://github.com/kimilg/study-scheduler-app.git
+         sh "git clone https://github.com/kimilg/study-scheduler-app.git"
     }
      
-//     withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-//         VARIABLE = "${key}" 
-//     }
-//     withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
-//         VARIABLE2 = "${key}" 
-//     }
-//     
-//     withCredentials([string(credentialsId: 'postman-collection-uid-platform-api', variable: 'collectionUid')]) {
-//         POSTMAN_COLLECTION_UID = "${collectionUid}"
-//     }
-//     withCredentials([string(credentialsId: 'postman-environment-uid-platform-api', variable: 'environmentUid')]) {
-//         POSTMAN_ENVIRONMENT_UID = "${environmentUid}"
-//     }
-//     withCredentials([string(credentialsId: 'postman-api-key', variable: 'apiKey')]) {
-//         POSTMAN_API_KEY = "${apiKey}"
-//     }
-//     withCredentials([string(credentialsId: 'postman-workspace-id-smarteditor', variable: 'workspaceId')]) {
-//         POSTMAN_WORKSPACE_ID = "${workspaceId}"
-//     }
     
     nodejs('nodejs') {
         try {
