@@ -75,7 +75,7 @@ def integrationTest() {
     dir('../../postman') {
         sh "rm -rf oop-project"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
-    }
+    } 
                  
     nodejs('nodejs') {  
         try {
