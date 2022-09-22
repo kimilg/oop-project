@@ -72,7 +72,6 @@ def integrationTest() {
     
     
     dir('../../') {
-        echo "repo name222 : ${repoName}"
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
      
