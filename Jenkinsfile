@@ -74,7 +74,7 @@ def integrationTest() {
     dir('../../') {
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
-     
+      
     
     nodejs('nodejs') {
         try {
