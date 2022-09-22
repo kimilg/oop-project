@@ -42,9 +42,9 @@ node {
 //     stage('deleteOldPostmanData') {
 //         deleteOldPostmanData();
 //     }
-//     stage('updatePostmanData') {
-//         fetchPostmanData();
-//     }
+    stage('updatePostmanData') {
+        fetchPostmanData();
+    }
     stage('IntegrationTest') {
        integrationTest()
     } 
@@ -67,13 +67,20 @@ def deleteOldPostmanData() {
 }
 
 def fetchPostmanData() {
-    timeStamp = "${currentBuild.startTimeInMillis}"
+//     timeStamp = "${currentBuild.startTimeInMillis}"
+//     
+//     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
+//     dir('../../postman') {
+//         sh "rm -rf oop-project*"
+//         sh "git clone https://github.com/kimilg/oop-project.git oop-project.${timeStamp}"
+//     }
     
+    final postmanDataDir = "oop-project"  
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project.${timeStamp}"
-    } 
+        sh "git clone https://github.com/kimilg/oop-project.git ${postmanDataDir}"
+    }  
 }
      
 def integrationTest() {
@@ -101,12 +108,7 @@ def integrationTest() {
       DATETIME_TAG = java.time.LocalDateTime.now()
       timeStamp = new Date().format("yyMMddHHmmss")
     }
-    final postmanDataDir = "oop-project"  
-    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
-    dir('../../postman') {
-        sh "rm -rf oop-project*"
-        sh "git clone https://github.com/kimilg/oop-project.git ${postmanDataDir}"
-    } 
+    
     
     
     nodejs('nodejs') {  

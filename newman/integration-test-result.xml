@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="myTestCollection" tests="1" time="0.891">
+  <testsuite name="testpostman" id="277f710a-3b13-472e-8dd2-c112bc336927" timestamp="2022-09-22T10:16:08.837Z" tests="1" failures="0" errors="0" time="0.891">
+    <testcase name="response is ok" time="0.891" classname="MyTestCollection"/>
+  </testsuite>
+</testsuites>
