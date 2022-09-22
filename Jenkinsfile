@@ -101,7 +101,7 @@ def integrationTest() {
       DATETIME_TAG = java.time.LocalDateTime.now()
       timeStamp = new Date().format("yyMMddHHmmss")
     }
-    final postmanDataDir = "oop-project.${DATE_TAG}"
+    final postmanDataDir = "oop-project"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
