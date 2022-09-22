@@ -94,7 +94,9 @@ def integrationTest() {
     
     
     
-    timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
+    //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
+    def now = new Date()
+    timeStamp = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
     postmanDataDir = "oop-project.${timeStamp}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
