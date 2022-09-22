@@ -74,12 +74,12 @@ def fetchPostmanData() {
 //     }
     checkout([
             $class                         : 'GitSCM',
-            branches                         : [[name: '**']],
+            branches                         : [[name: '*/master']],
             doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
             extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
                                               [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
             userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
-    ])
+    ]) 
 }
 
 
