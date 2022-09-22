@@ -39,6 +39,9 @@ node {
         echo "wow not merge commit@!"
     }
     
+    stage('deleteOldPostmanData') {
+        fetchPostmanData();
+    }
     stage('updatePostmanData') {
         fetchPostmanData();
     }
@@ -56,10 +59,16 @@ def isMergeCommit() {
         ) == 0
 }
 
-def fetchPostmanData() {
+def deleteOldPostmanData() {
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project"
+    } 
+}
+
+def fetchPostmanData() {
+    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
+    dir('../../postman') {
         sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     } 
 }
