@@ -80,7 +80,7 @@ def fetchPostmanData() {
                                               [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
             userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
     ]) 
-}
+} 
 
 
       
@@ -99,25 +99,13 @@ def integrationTest() {
     echo "job name : " + env.JOB_NAME 
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
-    
-    echo scm.getUserRemoteConfigs()[0].credentialsId
-    
-    //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
-    def now = new Date()
-    script {
-      DATE_TAG = java.time.LocalDate.now() 
-      DATETIME_TAG = java.time.LocalDateTime.now()
-      timeStamp = new Date().format("yyMMddHHmmss")
-    }
-    
-    
+    //echo scm.getUserRemoteConfigs()[0].credentialsId
     
     nodejs('nodejs') {       
         try {
             sh "${nodeJsHome}/bin/newman run postman/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir /Users/user/Postman/files"
-                
         }  
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
