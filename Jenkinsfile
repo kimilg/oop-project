@@ -96,7 +96,7 @@ def integrationTest() {
     
     //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     def now = new Date()
-    timeStamp = now.format("yyMMdd.HHmmss", TimeZone.getTimeZone('UTC'))
+    timeStamp = now.format("yyMMddHHmmss", TimeZone.getTimeZone('UTC'))
     script {
       DATE_TAG = java.time.LocalDate.now()
       DATETIME_TAG = java.time.LocalDateTime.now()
