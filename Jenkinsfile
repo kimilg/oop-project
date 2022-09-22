@@ -101,7 +101,7 @@ def integrationTest() {
       DATE_TAG = java.time.LocalDate.now()
       DATETIME_TAG = java.time.LocalDateTime.now()
     }
-    postmanDataDir = "oop-project.${DATETIME_TAG}"
+    postmanDataDir = "oop-project.${currentBuild.startTimeInMillis}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
         sh "rm -rf oop-project*"
