@@ -72,7 +72,7 @@ def integrationTest() {
     echo "repo name : ${repoName}" 
     
     if("${repoName}" == "oop-project") {
-         dir('~/.jenkins/') {
+         dir('../../') {
              echo "repo name222 : ${repoName}"
              sh "git clone https://github.com/kimilg/study-scheduler-app.git"
          }
@@ -82,10 +82,10 @@ def integrationTest() {
     nodejs('nodejs') {
         try {
             
-            sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-            "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
-            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
-            "--working-dir /Users/user/Postman/files"
+//             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
+//             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
+//             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
+//             "--working-dir /Users/user/Postman/files"
             
         }
         catch(e) {
