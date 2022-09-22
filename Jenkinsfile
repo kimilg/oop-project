@@ -39,7 +39,9 @@ node {
         echo "wow not merge commit@!"
     }
     
-    
+    stage('updatePostmanData') {
+        fetchPostmanData();
+    }
     stage('IntegrationTest') {
        integrationTest()
     }
@@ -52,6 +54,14 @@ def isMergeCommit() {
         script : "git rev-parse --verify -q ${commitName}^2 > /dev/null;",  
         returnStatus: true
         ) == 0
+}
+
+def fetchPostmanData() {
+    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
+    dir('../../postman') {
+        sh "rm -rf oop-project"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+    } 
 }
   
 def integrationTest() {
@@ -70,13 +80,6 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     
-    
-    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
-    dir('../../postman') {
-        sh "rm -rf oop-project"
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
-    } 
-                  
     nodejs('nodejs') {  
         try {
             sh "${nodeJsHome}/bin/newman run ~/.jenkins/postman/oop-project/postman-data/test-collection.json " +
