@@ -77,7 +77,7 @@ def fetchPostmanData() {
 }
 
 
-     
+      
 def integrationTest() {
     nodeJsHome = tool name: 'nodejs', type: 'nodejs'
     //newmanHome = "${nodeJsHome}/bin"    
