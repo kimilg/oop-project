@@ -39,9 +39,9 @@ node {
         echo "wow not merge commit@!"
     }
     
-    stage('deleteOldPostmanData') {
-        deleteOldPostmanData();
-    }
+//     stage('deleteOldPostmanData') {
+//         deleteOldPostmanData();
+//     }
     stage('updatePostmanData') {
         fetchPostmanData();
     }
@@ -69,9 +69,14 @@ def deleteOldPostmanData() {
 def fetchPostmanData() {
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
-        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
+    
+        git branch: 'jenkins', credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/oop-project.git'
+        
+        //sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }  
 }
+
+
      
 def integrationTest() {
     nodeJsHome = tool name: 'nodejs', type: 'nodejs'
