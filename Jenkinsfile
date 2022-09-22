@@ -96,10 +96,10 @@ def integrationTest() {
     
     //timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     def now = new Date()
-    timeStamp = now.format("yyMMddHHmmss")
     script {
-      DATE_TAG = java.time.LocalDate.now()
+      DATE_TAG = java.time.LocalDate.now() 
       DATETIME_TAG = java.time.LocalDateTime.now()
+      timeStamp = new Date().format("yyMMddHHmmss")
     }
     final postmanDataDir = "oop-project.${DATETIME_TAG}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
