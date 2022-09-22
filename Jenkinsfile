@@ -41,7 +41,7 @@ node {
     
     
     stage('IntegrationTest') {
-        integrationTest()
+       integrationTest()
     }
     
 }
@@ -67,25 +67,23 @@ def integrationTest() {
     echo "target branch is " + env.CHANGE_TARGET
     
     echo "job name : " + env.JOB_NAME 
-    repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
+    //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     
     echo "repo name : ${repoName}" 
     
-    if("${repoName}" == "oop-project") {
-         dir('../../') {
-             echo "repo name222 : ${repoName}"
-             sh "git clone https://github.com/kimilg/study-scheduler-app.git"
-         }
+    
+    dir('../../') {
+        echo "repo name222 : ${repoName}"
+        sh "git clone https://github.com/kimilg/oop-project.git oop-project"
     }
      
     
     nodejs('nodejs') {
         try {
             
-//             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-//             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
-//             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
-//             "--working-dir /Users/user/Postman/files"
+            sh "${nodeJsHome}/bin/newman run ~/.jenkins/oop-project/postman-data/test-collection.json" +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
+            "--working-dir /Users/user/Postman/files"
             
         }
         catch(e) {
