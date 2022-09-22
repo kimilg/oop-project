@@ -69,8 +69,7 @@ def integrationTest() {
     echo "job name : " + env.JOB_NAME 
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
-    
-    
+     
     nodejs('nodejs') {
         try {
         
