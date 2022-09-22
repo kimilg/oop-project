@@ -1,148 +1,51 @@
 {
 	"info": {
-		"_postman_id": "30fa3082-128a-4654-a0d8-99e3af8a1bc0",
-		"name": "New Collection",
+		"_postman_id": "f6c5adde-6cea-445e-a38b-7ea018c35113",
+		"name": "myTestCollection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "22637373"
 	},
 	"item": [
 		{
-			"name": "여행\b\b\b\b\b 글감",
-			"item": [
+			"name": "testpostman",
+			"event": [
 				{
-					"name": "인기여행지",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://travelsearch-api.naver.com/api/overseas/hot",
-							"protocol": "https",
-							"host": [
-								"travelsearch-api",
-								"naver",
-								"com"
-							],
-							"path": [
-								"api",
-								"overseas",
-								"hot"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "여행 검색",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://test-travel-external-api.ssl.naver.com/external/api/v2/hotel/hotelSearch?q=아사쿠&from=1&size=4",
-							"protocol": "https",
-							"host": [
-								"test-travel-external-api",
-								"ssl",
-								"naver",
-								"com"
-							],
-							"path": [
-								"external",
-								"api",
-								"v2",
-								"hotel",
-								"hotelSearch"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "아사쿠"
-								},
-								{
-									"key": "from",
-									"value": "1"
-								},
-								{
-									"key": "size",
-									"value": "4"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "New Request",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "asdfasdf",
-						"type": "text"
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// pm.test(\"response is not ok\", function () {",
+							"//     pm.response.to.have.status(400);",
+							"// });",
+							""
+						],
+						"type": "text/javascript"
 					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
-				"url": {
-					"raw": "http://dev-blog.editor.naver.com/%",
-					"protocol": "http",
-					"host": [
-						"dev-blog",
-						"editor",
-						"naver",
-						"com"
-					],
-					"path": [
-						"%"
-					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "신규 책 검색\b\b\b\b\b\b API",
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://frontapi.shopping.naver.com/book/v1/search/?serviceId=smartEditor&query=나혼자산다&page=1&pageSize=4",
-					"protocol": "http",
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
 					"host": [
-						"frontapi",
-						"shopping",
-						"naver",
+						"postman-echo",
 						"com"
 					],
 					"path": [
-						"book",
-						"v1",
-						"search",
-						""
+						"get"
 					],
 					"query": [
 						{
-							"key": "serviceId",
-							"value": "smartEditor"
+							"key": "foo1",
+							"value": "bar1"
 						},
 						{
-							"key": "query",
-							"value": "나혼자산다"
-						},
-						{
-							"key": "page",
-							"value": "1"
-						},
-						{
-							"key": "pageSize",
-							"value": "4"
+							"key": "foo2",
+							"value": "bar2"
 						}
 					]
 				}
