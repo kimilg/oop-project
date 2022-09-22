@@ -94,7 +94,7 @@ def integrationTest() {
     
     
     
-    timeStamp = "${BUILD_TIMESTAMP}" 
+    timeStamp = "${Util.getTimeSpanString(System.currentTimeMillis())}" 
     postmanDataDir = "oop-project.${timeStamp}"
     sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
     dir('../../postman') {
