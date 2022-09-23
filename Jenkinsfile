@@ -51,8 +51,8 @@ node {
             }
         },
         'IntegrationTest': {
-            if(!isMergeCommit() || env.BRANCH_NAME != "main"){
-                stage('IntegrationTest') {
+            stage('IntegrationTest') {
+                if(isMergeCommit() && env.BRANCH_NAME == "main"){
                     fetchPostmanData();
                     integrationTest();
                 }
