@@ -50,8 +50,8 @@ node {
                 echo "hello"
             }
         },
-        if(isMergeCommit() && env.BRANCH_NAME == "main"){
-            'IntegrationTest': {
+        'IntegrationTest': {
+            if(isMergeCommit() && env.BRANCH_NAME == "main"){
                 stage('IntegrationTest') {
                     fetchPostmanData();
                     integrationTest();
