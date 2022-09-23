@@ -45,17 +45,17 @@ node {
 
 
     stage('test') {
-        def stages = [:]
-        
-        stages["UnitTest"] = {
-            echo "hello"
+        parallel UnitTest: {
+            node('UnitTest') {
+                echo "hello"
+            }
+        },
+        IntegrationTest: {
+            node('IntegrationTest') {
+                fetchPostmanData();
+                IntegrationTest();
+            }
         }
-        stages["IntegrationTest"] = {
-            fetchPostmanData();
-            IntegrationTest();
-        }
-        
-        parallel(stages)
     }
 
 //     stage('updatePostmanData') {
