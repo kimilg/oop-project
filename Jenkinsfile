@@ -44,7 +44,7 @@ node {
 //     }
 
     
-    if(isMergeCommit() && env.BRANCH_NAME == "main"){
+    if(!isMergeCommit()){
         parallel(
             'UnitTest': {
                 stage('UnitTest') {
