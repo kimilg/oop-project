@@ -43,20 +43,17 @@ node {
 //         deleteOldPostmanData();
 //     }
 
-
-    parallel(
-        'UnitTest': {
+    stage('test'){
+        parallel{
             stage('UnitTest') {
                 echo "hello"
             }
-        },
-        'IntegrationTest': {
             stage('IntegrationTest') {
                 fetchPostmanData();
                 integrationTest();
             }
         }
-    )
+    }
 
 //     stage('updatePostmanData') {
 //         fetchPostmanData();
