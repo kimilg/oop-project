@@ -44,8 +44,8 @@ node {
 //     }
 
 
-    stage('test') {
-        parallel 'UnitTest': {
+    parallel(
+        'UnitTest': {
             stage('UnitTest') {
                 echo "hello"
             }
@@ -56,7 +56,7 @@ node {
                 integrationTest();
             }
         }
-    }
+    )
 
 //     stage('updatePostmanData') {
 //         fetchPostmanData();
