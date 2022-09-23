@@ -45,15 +45,17 @@ node {
 
 
     stage('test') {
-        parallel([
-            UnitTest: {
-                echo "hello"
-            },
-            IntegrationTest: {
-                fetchPostmanData();
-                IntegrationTest();
-            }
-        ])
+        def stages = [:]
+        
+        stages["UnitTest"] = {
+            echo "hello"
+        }
+        stages["IntegrationTest"] = {
+            fetchPostmanData();
+            IntegrationTest();
+        }
+        
+        parallel(stages)
     }
 
 //     stage('updatePostmanData') {
