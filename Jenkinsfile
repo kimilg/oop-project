@@ -45,12 +45,12 @@ node {
 
 
     stage('test') {
-        parallel 'UnitTest': {
+        parallel {
             stage('UnitTest') {
                 echo "hello"
             }
         },
-        'IntegrationTest': {
+        {
             stage('IntegrationTest') {
                 fetchPostmanData();
                 integrationTest();
