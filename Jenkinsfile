@@ -53,7 +53,7 @@ node {
         'IntegrationTest': {
             stage('IntegrationTest') {
                 fetchPostmanData();
-                IntegrationTest();
+                integrationTest();
             }
         }
     }
