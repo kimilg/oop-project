@@ -44,21 +44,28 @@ node {
 //     }
 
     
-    parallel(
-        'UnitTest': {
-            stage('UnitTest') {
-                echo "hello"
-            }
-        },
-        'IntegrationTest': {
-            if(isMergeCommit() && env.BRANCH_NAME == "main"){
+    if(isMergeCommit() && env.BRANCH_NAME == "main"){
+        parallel(
+            'UnitTest': {
+                stage('UnitTest') {
+                    echo "hello"
+                }
+            },
+            'IntegrationTest': {
                 stage('IntegrationTest') {
                     fetchPostmanData();
                     integrationTest();
                 }
             }
+        )
+    }
+    else {
+        stage('UnitTest') {
+            echo "hello"
         }
-    )
+    }
+    
+    
 
 
 //     stage('updatePostmanData') {
