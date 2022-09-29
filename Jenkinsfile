@@ -44,7 +44,12 @@ node {
 //     }
 
     
-    if(!isMergeCommit()){
+    if(isMergeCommit() && env.BRANCH_NAME == "main"){
+        stage('UnitTest') {
+            echo "hello"
+        }
+    }
+    else {
         parallel(
             'UnitTest': {
                 stage('UnitTest') {
@@ -58,11 +63,6 @@ node {
                 }
             }
         )
-    }
-    else {
-        stage('UnitTest') {
-            echo "hello"
-        }
     }
     
     
@@ -131,7 +131,9 @@ def integrationTest() {
         try {
             sh "${nodeJsHome}/bin/newman run postman/postman-data/test-collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
-            "--working-dir /Users/user/Postman/files"
+            "--working-dir postman/postman-data/file " +
+            "--iteration-data firstFile"
+            "--verbose"
         }  
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
