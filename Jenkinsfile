@@ -132,7 +132,7 @@ def integrationTest() {
             sh "${nodeJsHome}/bin/newman run postman/postman-data/myTestCollection.postman_collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir postman/postman-data/file " +
-            "--iteration-data firstFile"
+            "--iteration-data postman/postman-data/file/firstFile"
             "--verbose"
         }  
         catch(e) {
