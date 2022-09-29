@@ -126,13 +126,13 @@ def integrationTest() {
     //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
     //echo "repo name : ${repoName}" 
     //echo scm.getUserRemoteConfigs()[0].credentialsId
-    
+     
     nodejs('nodejs') {       
         try {
             sh "${nodeJsHome}/bin/newman run postman/postman-data/myTestCollection.postman_collection.json " +
             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
             "--working-dir postman/postman-data/file " +
-            "--iteration-data postman/postman-data/file/firstFile "
+            "--iteration-data postman/postman-data/file/firstFile " +
             "--verbose"
         }  
         catch(e) {
