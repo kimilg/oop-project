@@ -58,8 +58,10 @@ node {
             },
             'IntegrationTest': {
                 stage('IntegrationTest') {
-                    fetchPostmanData();
-                    integrationTest();
+                    if (false) {
+                        fetchPostmanData();
+                        integrationTest();
+                    }
                 }
             }
         )
