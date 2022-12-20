@@ -70,6 +70,7 @@ node {
     
     echo "${currentBuild.buildCauses}"
     echo "${currentBuild.getBuildCauses('hudson.model.Cause$UserCause')}"
+    echo "${currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')}"
     echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}" 
     def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause') != null
     if(isStartedByUser) {
