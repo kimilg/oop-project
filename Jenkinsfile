@@ -90,10 +90,9 @@ node {
         // git add, commit, push
         withCredentials([gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId,
                                          gitToolName: 'Default')]) {
-            sh 'cd postman'
-            sh 'rm postman-data/myTestCollection.postman_collection.json'
-            sh 'git commit -am "Update postman data"'
-            sh 'git push origin master'
+            sh 'rm postman/postman-data/myTestCollection.postman_collection.json'
+            sh 'cd postman && git commit -am "Update postman data"'
+            sh 'cd postman && git push origin master'
         }
         
         
