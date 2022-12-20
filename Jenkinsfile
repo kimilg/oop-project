@@ -44,6 +44,7 @@ node {
 //     }
 
     
+    
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
         stage('UnitTest') {
             echo "hello"
@@ -67,7 +68,10 @@ node {
         )
     }
     
-     
+     def isStartedByUser = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause) != null
+     if(isStartedByUser) {
+        echo "This is triggered by build now !!!!!!!!! "
+     }
 
 
 //     stage('updatePostmanData') {
