@@ -75,7 +75,28 @@ node {
     def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').size()
     echo "$isStartedByUser"
     if (isStartedByUser) {
-       echo "This is triggered by build now !!!!!!!!! "
+        echo "This is triggered by build now !!!!!!!!! "
+        checkout([
+                    $class                         : 'GitSCM',
+                    branches                         : [[name: '*/master']],
+                    doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                    extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
+                                                      [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+                    userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
+            ]) 
+        }
+        // curl로 GET shell script 실행 with postman api
+        
+        // git add, commit, push
+        withCredentials([gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId,
+                                         gitToolName: 'Default')]) {
+            sh 'rm postman/postman-data/myTestCollection.postman_collection.json'
+            sh 'git add .'
+            sh 'git commit -m "Update postman data"'
+            sh 'git push'
+        }
+        
+        
     }
 
 
