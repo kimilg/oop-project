@@ -68,7 +68,7 @@ node {
         )
     }
     
-     def isStartedByUser = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause) != null
+     def isStartedByUser = currentBuild.rawBuild.getCause('hudson.model.Cause$UserIdCause') != null
      if(isStartedByUser) {
         echo "This is triggered by build now !!!!!!!!! "
      }
