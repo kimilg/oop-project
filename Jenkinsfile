@@ -68,10 +68,13 @@ node {
         )
     }
     
-     def isStartedByUser = currentBuild.rawBuild.getCause('hudson.model.Cause$UserIdCause') != null
-     if(isStartedByUser) {
-        echo "This is triggered by build now !!!!!!!!! "
-     }
+    echo "${currentBuild.buildCauses}"
+    echo "${currentBuild.getBuildCauses('hudson.model.Cause$UserCause')}"
+    echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}" 
+    def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause') != null
+    if(isStartedByUser) {
+       echo "This is triggered by build now !!!!!!!!! "
+    }
 
 
 //     stage('updatePostmanData') {
