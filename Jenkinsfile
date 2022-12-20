@@ -92,8 +92,9 @@ node {
                                          gitToolName: 'Default')]) {
             sh 'rm postman/postman-data/test-collection.json'
 //             sh 'cd postman && git remote add origin "https://github.com/kimilg/myhomepage.git"'
-            sh 'cd postman && git init'
+//             sh 'cd postman && git init'
             sh 'cd postman && git remote -v'
+            sh 'cd postman && git checkout master'
             sh 'cd postman && git commit -am "Update postman data"'
             sh 'cd postman && git push -u origin master'
         }
