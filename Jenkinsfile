@@ -74,6 +74,12 @@ node {
     echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}" 
     def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').size()
     echo "$isStartedByUser"
+    echo "postman api key: "
+    
+    withCredentials([string(credentialsId: 'postman-api-key', variable: 'SECRET')]) { 
+        echo "My secret text is '${SECRET}'"
+    }
+        
 //     if (isStartedByUser) {
         echo "This is triggered by build now !!!!!!!!! "
         checkout([
@@ -90,16 +96,12 @@ node {
         // git add, commit, push
         withCredentials([gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId,
                                          gitToolName: 'Default')]) {
-            sh 'rm postman/postman-data/test-collection.json'
-//             sh 'cd postman && git remote add origin "https://github.com/kimilg/myhomepage.git"'
-//             sh 'cd postman && git init'
-            sh 'cd postman && git remote -v'
-            sh 'cd postman && git checkout master'
-            sh 'cd postman && git commit -am "Update postman data"'
-            sh 'cd postman && git push -u origin master'
+            //sh 'rm postman/postman-data/test-collection.json'
+            sh 'cd postman && git remote -v && ' +
+            'git checkout master && ' +
+            'git commit -am "Update postman data" ' +
+            'git push -u origin master'
         }
-        
-        
 //     }
 
 
