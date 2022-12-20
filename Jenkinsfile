@@ -92,17 +92,16 @@ node {
         // curl로 GET shell script 실행 with postman api
         
         // git add, commit, push
-        withCredentials([gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId,
-                                         gitToolName: 'Default')]) {
+        withCredentials([
+            gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, gitToolName: 'Default'),
+            string(credentialsId: 'postman-api-key', variable: 'SECRET')
+        ]) {
             //sh 'rm postman/postman-data/test-collection.json'
-            withCredentials([string(credentialsId: 'postman-api-key', variable: 'SECRET')]) { 
-                echo "My secret text is '${SECRET}'"
-                sh 'cd postman && git remote -v && ' +
-                'git checkout master && ' +
-                'git commit -am "Update postman data" ' +
-                'git push -u origin master'
-            }
-            
+            echo "My secret text is '${SECRET}'"
+            sh 'cd postman && git remote -v && ' +
+            'git checkout master && ' +
+            'git commit -am "Update postman data" ' +
+            'git push -u origin master'
         }
 //     }
 
