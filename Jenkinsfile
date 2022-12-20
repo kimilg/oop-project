@@ -76,9 +76,7 @@ node {
     echo "$isStartedByUser"
     echo "postman api key: "
     
-    withCredentials([string(credentialsId: 'postman-api-key', variable: 'SECRET')]) { 
-        echo "My secret text is '${SECRET}'"
-    }
+    
         
 //     if (isStartedByUser) {
         echo "This is triggered by build now !!!!!!!!! "
@@ -97,10 +95,14 @@ node {
         withCredentials([gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId,
                                          gitToolName: 'Default')]) {
             //sh 'rm postman/postman-data/test-collection.json'
-            sh 'cd postman && git remote -v && ' +
-            'git checkout master && ' +
-            'git commit -am "Update postman data" ' +
-            'git push -u origin master'
+            withCredentials([string(credentialsId: 'postman-api-key', variable: 'SECRET')]) { 
+                echo "My secret text is '${SECRET}'"
+                sh 'cd postman && git remote -v && ' +
+                'git checkout master && ' +
+                'git commit -am "Update postman data" ' +
+                'git push -u origin master'
+            }
+            
         }
 //     }
 
