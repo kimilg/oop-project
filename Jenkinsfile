@@ -101,7 +101,7 @@ node {
             sh 'git remote -v'
             sh 'cd postman && git remote -v && ' +
             'git checkout master'
-            sh 'cd postman && [ ! -z "$(git status --porcelain=v1 2>/dev/null)" ] && echo "No uncommited change && echo "hmm possible?" '
+            sh 'cd postman && [ ! -z "$(git status --porcelain=v1 2>/dev/null)" ] && echo "No uncommited change" && echo "hmm possible?" '
             
             //'git commit -am "Update postman data" ' +
             //'git push -u origin master'
