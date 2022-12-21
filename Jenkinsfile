@@ -100,9 +100,11 @@ node {
             echo "My secret text is '${SECRET}'"
             sh 'git remote -v'
             sh 'cd postman && git remote -v && ' +
-            'git checkout master && ' +
-            'git commit -am "Update postman data" ' +
-            'git push -u origin master'
+            'git checkout master && '
+            sh 'cd postman && [ -z "$(git status --porcelain=v1 2>/dev/null)" ] && echo "No uncommited change"'
+            
+            //'git commit -am "Update postman data" ' +
+            //'git push -u origin master'
        }
 //     }
 
