@@ -98,16 +98,32 @@ node {
         ]) {
             //sh 'rm postman/postman-data/test-collection.json'
             echo "My secret text is '${SECRET}'"
+            sh 'git remote -v'
             sh 'cd postman && git remote -v && ' +
             'git checkout master && ' +
             'git commit -am "Update postman data" ' +
             'git push -u origin master'
-        }
+       }
 //     }
 
 
+        fetchPostmanData()
+        
+        withCredentials([
+            gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, gitToolName: 'Default'),
+            string(credentialsId: 'postman-api-key', variable: 'SECRET')
+        ]) {
+            //sh 'rm postman/postman-data/test-collection.json'
+            echo "My secret text is '${SECRET}'"
+            sh 'git remote -v'
+            sh 'cd postman && git remote -v && ' +
+            'git checkout master && ' +
+            //'git commit -am "Update postman data" ' +
+            //'git push -u origin master'
+       }
+
 //     stage('updatePostmanData') {
-//         fetchPostmanData();
+//         fetchPostmanData()
 //     }
 //     stage('IntegrationTest') {
 //        integrationTest()
@@ -131,7 +147,7 @@ def deleteOldPostmanData() {
 }
 
 def fetchPostmanData() {
-    sh "if [ ! -d postman ]; then mkdir postman; fi" 
+//    sh "if [ ! -d postman ]; then mkdir postman; fi" 
     
 //     dir('postman') {
 //         git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
