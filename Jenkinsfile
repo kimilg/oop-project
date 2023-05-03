@@ -41,7 +41,7 @@ node {
 //     stage('deleteOldPostmanData') {
 //         deleteOldPostmanData();
 //     }
-
+    
     
     
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
@@ -74,6 +74,16 @@ node {
     def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').size()
     echo "$isStartedByUser"
     echo "postman api key: "
+    echo "branch name is " + scm.branches[0].name //test-jenkins
+    echo "branch name 2 is " + checkout(scm).GIT_BRANCH //origin/test-jenkins
+    echo "원래 branch is " + env.BRANCH_NAME
+    echo "target branch is " + env.CHANGE_TARGET
+    if(isMergeCommit()) {
+        echo "merge commit 맞다!"
+    }
+    else {
+        echo "merge commit 아니다!"
+    }
     
     
         
