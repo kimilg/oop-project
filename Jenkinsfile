@@ -30,7 +30,6 @@ node {
 //     def POSTMAN_ENVIRONMENT_UID = properties."POSTMAN_ENVIRONMENT_UID"
 //     def POSTMAN_API_KEY = properties."POSTMAN_API_KEY"
     
-
     
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
         echo "wow merge commit!"
