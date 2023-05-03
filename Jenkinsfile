@@ -7,7 +7,7 @@ properties([
 ])
     
     
-properties([pipelineTriggers([githubPullRequests(events: [close()], spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
+//properties([pipelineTriggers([githubPullRequests(events: [close()], spec: '', triggerMode: 'HEAVY_HOOKS'), githubPush()])])
 node {
 
     stage('Checkout') {
@@ -18,8 +18,8 @@ node {
                 extensions                     : [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
                 userRemoteConfigs               : scm.userRemoteConfigs,
         ])
-    }
-    
+    } 
+     
 //     Properties properties = new Properties()
 //     File propertiesFile = new File('/Users/user/Documents/kimilg/oop-project/local.properties')
 //     propertiesFile.withInputStream {
@@ -30,7 +30,6 @@ node {
 //     def POSTMAN_ENVIRONMENT_UID = properties."POSTMAN_ENVIRONMENT_UID"
 //     def POSTMAN_API_KEY = properties."POSTMAN_API_KEY"
     
-
     
     if(isMergeCommit() && env.BRANCH_NAME == "main"){
         echo "wow merge commit!"
@@ -39,10 +38,100 @@ node {
         echo "wow not merge commit@!"
     }
     
+//     stage('deleteOldPostmanData') {
+//         deleteOldPostmanData();
+//     }
     
-    stage('IntegrationTest') {
-        integrationTest()
+    
+    
+    if(isMergeCommit() && env.BRANCH_NAME == "main"){
+        stage('UnitTest') {
+            echo "hello"
+        }
     }
+    else {
+        parallel(
+            'UnitTest': {
+                stage('UnitTest') {
+                    echo "hello"
+                }
+            },
+            'IntegrationTest': {
+                if (false) {
+                    stage('IntegrationTest') {
+                        fetchPostmanData();
+                        integrationTest();
+                    }
+                }
+            }
+        )
+    }
+    
+    echo "${currentBuild.buildCauses}"
+    echo "${currentBuild.getBuildCauses('hudson.model.Cause$UserCause')}"
+    echo "${currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')}"
+    echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}" 
+    def isStartedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').size()
+    echo "$isStartedByUser"
+    echo "postman api key: "
+    echo "branch name is " + scm.branches[0].name //test-jenkins
+    echo "branch name 2 is " + checkout(scm).GIT_BRANCH //origin/test-jenkins
+    echo "원래 branch is " + env.BRANCH_NAME
+    echo "target branch is " + env.CHANGE_TARGET
+    if(isMergeCommit()) {
+        echo "merge commit 맞다!"
+    }
+    else {
+        echo "merge commit 아니다!"
+    }
+    
+    
+        
+//     if (isStartedByUser) {
+        echo "This is triggered by build now !!!!!!!!! "
+        checkout([
+                    $class                         : 'GitSCM',
+                    branches                         : [[name: '*/master']],
+                    doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                    extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
+                                                      [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+                    userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
+            ]) 
+        
+        // curl로 GET shell script 실행 with postman api
+        
+        // git add, commit, push
+        withCredentials([
+            gitUsernamePassword(credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, gitToolName: 'Default'),
+            string(credentialsId: 'postman-api-key', variable: 'SECRET')
+        ]) {
+            //sh 'rm postman/postman-data/test-collection.json'
+            echo "My secret text is '${SECRET}'"
+            sh 'git remote -v'
+            sh 'cd postman && git remote -v && ' +
+            'git checkout master' 
+            sh '''cd postman 
+               if [ ! -z "$(git status --porcelain=v1 2>/dev/null)" ]; then  
+               echo "uncommited change" 
+               else echo "no uncommited change"
+               fi'''
+             
+            //'git commit -am "Update postman data" ' +
+            //'git push -u origin master'
+       }
+//     }
+
+
+        fetchPostmanData()
+        
+        
+
+//     stage('updatePostmanData') {
+//         fetchPostmanData()
+//     }
+//     stage('IntegrationTest') {
+//        integrationTest()
+//     } 
     
 }
 
@@ -53,7 +142,32 @@ def isMergeCommit() {
         returnStatus: true
         ) == 0
 }
-  
+
+def deleteOldPostmanData() {
+    sh "if [ ! -d ../../postman ]; then mkdir postman; fi" 
+    dir('../../postman') {
+        sh "rm -rf oop-project"
+    } 
+}
+
+def fetchPostmanData() {
+//    sh "if [ ! -d postman ]; then mkdir postman; fi" 
+    
+//     dir('postman') {
+//         git credentialsId: '7ac8dbd8-7b01-4840-9544-93685a7883f1', url: 'https://github.com/kimilg/myhomepage.git'
+//     }
+    checkout([
+            $class                         : 'GitSCM',
+            branches                         : [[name: '*/master']],
+            doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+            extensions                     : [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'postman'],
+                                              [$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+            userRemoteConfigs               : [[credentialsId: scm.getUserRemoteConfigs()[0].credentialsId, url: 'https://github.com/kimilg/myhomepage.git']]
+    ]) 
+}  
+
+ 
+      
 def integrationTest() {
     nodeJsHome = tool name: 'nodejs', type: 'nodejs'
     //newmanHome = "${nodeJsHome}/bin"    
@@ -65,73 +179,28 @@ def integrationTest() {
     
     echo "원래 branch is " + env.BRANCH_NAME
     echo "target branch is " + env.CHANGE_TARGET
-    
+          
     echo "job name : " + env.JOB_NAME 
-    repoName = checkout(scm).getUserRemoteConfig()[0].getUrl().tokenize('/').last()
-    
-    echo "repo name : " + repoName
-    echo "repo name : " + $repoName
+    //repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split('\\.')[0]
+    //echo "repo name : ${repoName}" 
+    //echo scm.getUserRemoteConfigs()[0].credentialsId
      
-    withCredentials([string(credentialsId: 'secret-key', variable: 'key')]) {
-        VARIABLE = "${key}" 
-    }
-    withCredentials([string(credentialsId: 'secret-key2', variable: 'key')]) {
-        VARIABLE2 = "${key}" 
-    }
-    
-    withCredentials([string(credentialsId: 'postman-collection-uid-platform-api', variable: 'collectionUid')]) {
-        POSTMAN_COLLECTION_UID = "${collectionUid}"
-    }
-    withCredentials([string(credentialsId: 'postman-environment-uid-platform-api', variable: 'environmentUid')]) {
-        POSTMAN_ENVIRONMENT_UID = "${environmentUid}"
-    }
-    withCredentials([string(credentialsId: 'postman-api-key', variable: 'apiKey')]) {
-        POSTMAN_API_KEY = "${apiKey}"
-    }
-    withCredentials([string(credentialsId: 'postman-workspace-id-smarteditor', variable: 'workspaceId')]) {
-        POSTMAN_WORKSPACE_ID = "${workspaceId}"
-    }
-    
-    nodejs('nodejs') {
+    nodejs('nodejs') {       
         try {
-            
-//             sh "${nodeJsHome}/bin/newman run ~/Downloads/platform-api.postman_collection.json " +
-//             "--environment ~/Downloads/platform-api-dev.postman_environment.json " +
-//             "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml'" +
-//             "--working-dir /Users/user/Postman/files"
-            
-            sh 'npm install -g newman-reporter-postman-cloud'
-            
-            sh "${nodeJsHome}/bin/newman run https://api.getpostman.com/collections/${POSTMAN_COLLECTION_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--environment https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_UID}?" +
-            "apikey=${POSTMAN_API_KEY} " +
-            "--reporters postman-cloud --reporter-apikey ${POSTMAN_API_KEY} " +
-            "--reporter-workspaceId ${POSTMAN_WORKSPACE_ID} "
-        }
+            sh "${nodeJsHome}/bin/newman run postman/postman-data/myTestCollection.postman_collection.json " +
+            "--reporters cli,junit --reporter-junit-export 'newman/integration-test-result.xml' " +
+            "--working-dir postman/postman-data/file " +
+            "--iteration-data postman/postman-data/file/firstFile " +
+            "--verbose"
+        }  
         catch(e) {
             //notifySlack("Integration Test Failed.", "danger", env.BUILD_URL + "testReport")
             throw e
         } finally {
-//             junit 'newman/integration-test-result.xml' 
+            junit testResults: 'newman/integration-test-result.xml', skipPublishingChecks: true
+            //junit 'newman/integration-test-result.xml' 
         }
     }
-    
-//         nodejs('nodejs') {
-//             try { 
-//                 sh "node -v"
-//                 //sh "${newmanHome}/newman run ~/Downloads/ilgoo-test-collection.postman_collection.json"
-//                 sh "${nodeJsHome}/bin/newman run ~/Downloads/ilgoo-test-collection.json " +
-//                    //"--reporters htmlextra --reporter-htmlextra-export 'newman/newman-html-result.html' "
-//                    //"--reporters html --reporter-html-export 'newman/newman-html-result.html' "                                  
-//                 "--reporters cli,junit --reporter-junit-export 'newman/myreport.xml'" 
-//             } catch(e) {
-//                 echo "wow this fails!!"
-//                 throw e
-//             } finally {
-//                 junit 'newman/myreport.xml' 
-//             }
-//         }
     
 }
 
