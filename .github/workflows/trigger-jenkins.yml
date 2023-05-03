@@ -1,18 +1,18 @@
-#on:
-#  pull_request:
-#    branches:
-#      - main
-#    types: [closed]
-#jobs:
-#  build:
-#    name: Build
-#    if: github.event.pull_request.merged == true
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: trigger single Job
-#        uses: appleboy/jenkins-action@master
-#        with:
-#          url: "https://ea49-211-249-71-108.jp.ngrok.io"
-#          user: "gooilgoo"
-#          token: ${{ secrets.TOKEN }}
-#          job: "oop-prj-multibranch-test"
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+jobs:
+  build:
+    name: Build
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: trigger single Job
+        uses: appleboy/jenkins-action@master
+        with:
+          url: "https://ea49-211-249-71-108.jp.ngrok.io"
+          user: "gooilgoo"
+          token: ${{ secrets.TOKEN }}
+          job: "oop-prj-multibranch-test"
