@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Config{
 	static FileManager fm = new FileManager();
-	
+	 
 	static Scanner scan = new Scanner(System.in); 
 	public static int mapRow = fm.buildMap().length;  
 	public static int mapCol = fm.buildMap()[0].length;  
