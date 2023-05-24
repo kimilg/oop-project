@@ -13,5 +13,9 @@ public class Create {
 	private int y;
 	public int cnt() {
 		return y;
+<<<<<<< Updated upstream
 	}
+=======
+	} 
+>>>>>>> Stashed changes
 }
