@@ -1,12 +1,9 @@
-name: Release-Notes-Preview
+name: Semantic-Release-Notes-Preview
 
-on:
-  pull_request:
+on: [pull_request, issue_comment]:
     branches:
       - jenkins
-    types: [opened, edited, reopened]
-  issue_comment:
-    types: [created, edited]
+    types: [opened, edited, reopened, created]
 
 jobs:
   preview:
