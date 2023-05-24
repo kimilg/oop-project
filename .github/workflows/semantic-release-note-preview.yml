@@ -24,8 +24,8 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           body: |
-          Thank you for you contribution. Below is a preview of the release notes if your PR gets merged.
+            Thank you for you contribution. Below is a preview of the release notes if your PR gets merged.
       
-          ---
-      
-          ${{ steps.release-notes-preview.outputs.releaseNotes }}
+            ---
+        
+            ${{ steps.release-notes-preview.outputs.releaseNotes }}
